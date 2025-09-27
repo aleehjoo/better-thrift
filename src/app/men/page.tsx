@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from "@/components/Navbar";
 
-const MensPage = () => {
+export default function MensPage () {
     return (
         <section className="w-full">
             <Navbar />
@@ -91,4 +91,3 @@ const MensPage = () => {
         </section>
     )
 }
-export default MensPage
