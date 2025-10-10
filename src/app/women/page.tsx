@@ -38,7 +38,7 @@ export default function WomensPage () {
                                         </label>
                                         <label className="flex items-center gap-3 text-sm">
                                             <input type="checkbox" className="accent-foreground/70" />
-                                            Hoodies & Sweatshirts
+                                            Hoodie
                                         </label>
                                         <label className="flex items-center gap-3 text-sm">
                                             <input type="checkbox" className="accent-foreground/70" />
@@ -52,10 +52,7 @@ export default function WomensPage () {
                                             <input type="checkbox" className="accent-foreground/70" />
                                             Shorts
                                         </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Activewear
-                                        </label>
+                                        
                                     </div>
                                 </div>
                             </div>

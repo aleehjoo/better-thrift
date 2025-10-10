@@ -10,11 +10,10 @@ export default function MensPage () {
         "Pants",
         "Accessories",
         "Shoes",
-        "Hoodies & Sweatshirts",
+        "Hoodie",
         "Sweaters",
         "Suits & Blazers",
         "Shorts",
-        "Activewear",
     ] as const;
 
     type Product = {
@@ -31,11 +30,10 @@ export default function MensPage () {
         { id: 3, name: "Slim Chino Pants", price: "$35.00", type: "Pants", tags: ["workwear", "stretch"] },
         { id: 4, name: "Leather Belt", price: "$18.00", type: "Accessories", tags: ["leather", "brown"] },
         { id: 5, name: "Retro Sneakers", price: "$49.00", type: "Shoes", tags: ["retro", "street"] },
-        { id: 6, name: "Fleece Hoodie", price: "$32.00", type: "Hoodies & Sweatshirts", tags: ["warm", "athleisure"] },
+        { id: 6, name: "Fleece Hoodie", price: "$32.00", type: "Hoodie", tags: ["warm", "athleisure"] },
         { id: 7, name: "Cable Knit Sweater", price: "$38.00", type: "Sweaters", tags: ["wool", "cozy"] },
         { id: 8, name: "Linen Blazer", price: "$72.00", type: "Suits & Blazers", tags: ["linen", "summer"] },
         { id: 9, name: "Athletic Shorts", price: "$22.00", type: "Shorts", tags: ["training", "lightweight"] },
-        { id: 10, name: "Compression Tee", price: "$19.00", type: "Activewear", tags: ["gym", "quick-dry"] },
         { id: 11, name: "Flannel Shirt", price: "$27.00", type: "Shirts", tags: ["flannel", "warm"] },
         { id: 12, name: "Bomber Jacket", price: "$61.00", type: "Jackets", tags: ["nylon", "street"] },
     ];

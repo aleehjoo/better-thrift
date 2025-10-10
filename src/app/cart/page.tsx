@@ -11,11 +11,10 @@ export default function CartPage() {
         "Pants",
         "Accessories",
         "Shoes",
-        "Hoodies & Sweatshirts",
+        "Hoodie",
         "Sweaters",
         "Suits & Blazers",
         "Shorts",
-        "Activewear",
     ] as const;
 
     type CartItemType = {
