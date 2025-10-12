@@ -1,11 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Search, ShoppingCart, Heart, User } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, ShoppingCart, Heart, User, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
+    const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
+
+    const productCategories = [
+        { name: "Accessories", href: "/accessories" },
+        { name: "Hoodies", href: "/hoodie" },
+        { name: "Jackets", href: "/jackets" },
+        { name: "Pants", href: "/pants" },
+        { name: "Shirts", href: "/shirts" },
+        { name: "Shoes", href: "/shoes" },
+        { name: "Shorts", href: "/shorts" },
+        { name: "Suits & Blazers", href: "/suits-and-blazers" },
+        { name: "Sweaters", href: "/sweaters" },
+    ];
+
+    const handleMouseEnter = () => {
+        if (dropdownTimeout) {
+            clearTimeout(dropdownTimeout);
+            setDropdownTimeout(null);
+        }
+        setIsProductsDropdownOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        const timeout = setTimeout(() => {
+            setIsProductsDropdownOpen(false);
+        }, 150); // 150ms delay before closing
+        setDropdownTimeout(timeout);
+    };
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (dropdownTimeout) {
+                clearTimeout(dropdownTimeout);
+            }
+        };
+    }, [dropdownTimeout]);
 
     return (
         <nav className="w-full border-b border-foreground/20 bg-background sticky top-0 z-50">
@@ -29,6 +67,37 @@ export default function Navbar() {
                     <Link href="/new-arrivals" className="hover:text-foreground/70 transition-colors">
                         New Arrivals
                     </Link>
+                    
+                    {/* Products Dropdown */}
+                    <div className="relative">
+                        <button
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            className="flex items-center gap-1 hover:text-foreground/70 transition-colors"
+                        >
+                            Products
+                            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isProductsDropdownOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        
+                        {isProductsDropdownOpen && (
+                            <div
+                                onMouseEnter={handleMouseEnter}
+                                onMouseLeave={handleMouseLeave}
+                                className="absolute top-full left-0 mt-2 w-56 bg-background border border-foreground/20 rounded-lg shadow-lg py-2 z-50 animate-in slide-in-from-top-2 duration-200"
+                            >
+                                {productCategories.map((category) => (
+                                    <Link
+                                        key={category.href}
+                                        href={category.href}
+                                        className="block px-4 py-2 text-sm hover:bg-foreground/5 hover:text-foreground/80 transition-colors"
+                                    >
+                                        {category.name}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    
                     <Link href="/men" className="hover:text-foreground/70 transition-colors">
                         Men
                     </Link>
@@ -74,6 +143,24 @@ export default function Navbar() {
                     <Link href="/new-arrivals" onClick={() => setIsOpen(false)}>
                         New Arrivals
                     </Link>
+                    
+                    {/* Mobile Products Section */}
+                    <div className="space-y-2">
+                        <div className="font-medium text-foreground/80">Products</div>
+                        <div className="pl-4 space-y-2">
+                            {productCategories.map((category) => (
+                                <Link
+                                    key={category.href}
+                                    href={category.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className="block text-sm text-foreground/70 hover:text-foreground/90 transition-colors"
+                                >
+                                    {category.name}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                    
                     <Link href="/men" onClick={() => setIsOpen(false)}>
                         Men
                     </Link>
