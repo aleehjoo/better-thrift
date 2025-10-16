@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
+import ProductGrid from "@/components/ProductGrid";
 
 export default function MensPage () {
     const TYPES = [
@@ -102,23 +103,7 @@ export default function MensPage () {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {filtered.map((p) => (
-                                <div key={p.id} className="group rounded-xl overflow-hidden border border-foreground/15 bg-background">
-                                    <div className="aspect-[3/4] bg-foreground/5" />
-                                    <div className="p-3">
-                                        <p className="text-sm font-medium">{p.name}</p>
-                                        <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                            <span className="text-[10px] uppercase tracking-wide bg-foreground/10 text-foreground px-2 py-0.5 rounded">{p.type}</span>
-                                            {p.tags.slice(0, 2).map(tag => (
-                                                <span key={tag} className="text-[10px] bg-foreground/5 text-foreground/70 px-2 py-0.5 rounded">{tag}</span>
-                                            ))}
-                                        </div>
-                                        <p className="mt-2 text-sm font-semibold">{p.price}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <ProductGrid products={filtered} />
                     </main>
                 </div>
             </div>

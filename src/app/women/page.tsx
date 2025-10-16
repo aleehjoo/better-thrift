@@ -1,7 +1,22 @@
 import React from 'react'
 import Navbar from "@/components/Navbar";
+import ProductGrid from "@/components/ProductGrid";
 
 export default function WomensPage () {
+    const PRODUCTS = [
+        { id: 1, name: "Floral Midi Dress", price: "$49.00", type: "Dresses", tags: ["floral", "midi"], description: "Lightweight floral midi for spring days" },
+        { id: 2, name: "Oversized Denim Jacket", price: "$62.00", type: "Jackets", tags: ["denim", "oversized"], description: "Classic denim layer with relaxed fit" },
+        { id: 3, name: "High-Waist Mom Jeans", price: "$45.00", type: "Pants", tags: ["denim", "mom"], description: "Vintage-wash high-waist mom jeans" },
+        { id: 4, name: "Silk Scarf", price: "$24.00", type: "Accessories", tags: ["silk", "scarf"], description: "Luxurious silk scarf to elevate looks" },
+        { id: 5, name: "Platform Sneakers", price: "$59.00", type: "Shoes", tags: ["platform", "casual"], description: "Comfy platform sneakers with lift" },
+        { id: 6, name: "Cozy Knit Hoodie", price: "$39.00", type: "Hoodie", tags: ["knit", "cozy"], description: "Soft knit hoodie for everyday comfort" },
+        { id: 7, name: "Ribbed Cardigan", price: "$35.00", type: "Sweaters", tags: ["ribbed", "cardigan"], description: "Layerable ribbed knit cardigan" },
+        { id: 8, name: "Tailored Blazer", price: "$75.00", type: "Suits & Blazers", tags: ["tailored", "work"], description: "Polished blazer for work or evening" },
+        { id: 9, name: "Linen Shorts", price: "$29.00", type: "Shorts", tags: ["linen", "summer"], description: "Breathable linen shorts" },
+        { id: 10, name: "Graphic Tee", price: "$19.00", type: "Shirts", tags: ["graphic", "casual"], description: "Soft cotton graphic t-shirt" },
+        { id: 11, name: "Pleated Skirt", price: "$42.00", type: "Skirts", tags: ["pleated", "flowy"], description: "Flowy pleated skirt" },
+        { id: 12, name: "Ankle Boots", price: "$68.00", type: "Shoes", tags: ["ankle", "leather"], description: "Versatile ankle boots" },
+    ];
     return (
         <section className="w-full">
             <Navbar />
@@ -61,7 +76,7 @@ export default function WomensPage () {
 
                     <main className="md:col-span-3">
                         <div className="flex items-center justify-between mb-4">
-                            <p className="text-sm text-foreground/70">Showing curated men's items</p>
+                            <p className="text-sm text-foreground/70">Showing {PRODUCTS.length} items</p>
                             <div className="hidden md:flex items-center gap-2 text-sm text-foreground/60">
                                 <span>Sort:</span>
                                 <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Featured</button>
@@ -70,18 +85,7 @@ export default function WomensPage () {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {[...Array(12)].map((_, i) => (
-                                <div key={i} className="group rounded-xl overflow-hidden border border-foreground/15 bg-background">
-                                    <div className="aspect-[3/4] bg-foreground/5" />
-                                    <div className="p-3">
-                                        <p className="text-sm font-medium">Product {i + 1}</p>
-                                        <p className="text-xs text-foreground/60">Category</p>
-                                        <p className="mt-1 text-sm font-semibold">$—.—</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <ProductGrid products={PRODUCTS}/>
                     </main>
                 </div>
             </div>
