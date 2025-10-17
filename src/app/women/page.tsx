@@ -1,6 +1,9 @@
-import React from 'react'
+"use client";
+
+import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
+import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
 
 export default function WomensPage () {
     const PRODUCTS = [
@@ -17,6 +20,9 @@ export default function WomensPage () {
         { id: 11, name: "Pleated Skirt", price: "$42.00", type: "Skirts", tags: ["pleated", "flowy"], description: "Flowy pleated skirt" },
         { id: 12, name: "Ankle Boots", price: "$68.00", type: "Shoes", tags: ["ankle", "leather"], description: "Versatile ankle boots" },
     ];
+    const [sort, setSort] = useState<SortOption>("featured");
+    const sorted = useMemo(() => sortProducts(PRODUCTS, sort), [sort]);
+
     return (
         <section className="w-full">
             <Navbar />
@@ -76,16 +82,15 @@ export default function WomensPage () {
 
                     <main className="md:col-span-3">
                         <div className="flex items-center justify-between mb-4">
-                            <p className="text-sm text-foreground/70">Showing {PRODUCTS.length} items</p>
+                            <p className="text-sm text-foreground/70">
+                                Showing {sorted.length} {sorted.length === 1 ? 'item' : 'items'}
+                            </p>
                             <div className="hidden md:flex items-center gap-2 text-sm text-foreground/60">
-                                <span>Sort:</span>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Featured</button>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Newest</button>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Price</button>
+                                <SortDropdown value={sort} onChange={setSort} />
                             </div>
                         </div>
 
-                        <ProductGrid products={PRODUCTS}/>
+                        <ProductGrid products={sorted}/>
                     </main>
                 </div>
             </div>

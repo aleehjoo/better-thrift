@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
+import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
 
 export default function ShirtsPage() {
     const FILTERS = [
@@ -53,6 +54,9 @@ export default function ShirtsPage() {
         return PRODUCTS.filter(p => selectedFilters.has(p.type));
     }, [selectedFilters]);
 
+    const [sort, setSort] = useState<SortOption>("featured");
+    const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
+
     return (
         <section className="w-full">
             <Navbar />
@@ -98,14 +102,11 @@ export default function ShirtsPage() {
                                 {selectedFilters.size > 0 && <span className="ml-2 text-foreground/50">(filtered)</span>}
                             </p>
                             <div className="hidden md:flex items-center gap-2 text-sm text-foreground/60">
-                                <span>Sort:</span>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Featured</button>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Newest</button>
-                                <button className="px-2 py-1 rounded border border-foreground/15 hover:bg-foreground/5">Price</button>
+                                <SortDropdown value={sort} onChange={setSort} />
                             </div>
                         </div>
 
-                        <ProductGrid products={filtered} />
+                        <ProductGrid products={sorted} />
                     </main>
                 </div>
             </div>
