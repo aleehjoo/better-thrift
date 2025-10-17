@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
 import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function ShoesPage() {
     const FILTERS = [
@@ -61,10 +62,7 @@ export default function ShoesPage() {
         <section className="w-full">
             <Navbar />
             <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-bold mb-4">Shoes</h1>
-                    <p className="text-foreground/70 text-lg">Step up your style with our collection of premium footwear</p>
-                </div>
+                <SectionHeader title="Shoes" subtitle="Step up your style with our collection of premium footwear" />
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <aside className="md:col-span-1">

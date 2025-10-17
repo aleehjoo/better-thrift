@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function SuitsAndBlazersPage() {
     const FILTERS = [
@@ -56,10 +57,7 @@ export default function SuitsAndBlazersPage() {
         <section className="w-full">
             <Navbar />
             <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="mb-8">
-                    <h1 className="text-4xl font-bold mb-4">Suits & Blazers</h1>
-                    <p className="text-foreground/70 text-lg">Make a statement with our collection of professional and formal wear</p>
-                </div>
+                <SectionHeader title="Suits & Blazers" subtitle="Make a statement with our collection of professional and formal wear" />
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <aside className="md:col-span-1">

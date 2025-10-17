@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react'
 import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
 import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function MensPage () {
     const TYPES = [
@@ -64,6 +65,7 @@ export default function MensPage () {
         <section className="w-full">
             <Navbar />
             <div className="max-w-7xl mx-auto px-6 py-16">
+                <SectionHeader title="Men" subtitle="Explore essentials and standout pieces for him" />
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <aside className="md:col-span-1">
                         <div className="rounded-xl border border-foreground/15 bg-background p-5">
