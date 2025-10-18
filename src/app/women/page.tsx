@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
 import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
 import SectionHeader from "@/components/SectionHeader";
+import Footer from "@/components/Footer";
 
 export default function WomensPage () {
     const PRODUCTS = [
@@ -25,6 +26,7 @@ export default function WomensPage () {
     const sorted = useMemo(() => sortProducts(PRODUCTS, sort), [sort]);
 
     return (
+        <>
         <section className="w-full">
             <Navbar />
             <div className="max-w-7xl mx-auto px-6 py-16">
@@ -96,5 +98,7 @@ export default function WomensPage () {
                 </div>
             </div>
         </section>
+        <Footer />
+        </>
     )
 }

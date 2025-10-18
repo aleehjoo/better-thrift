@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import CartItem from "@/components/CartItem";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function CartPage() {
     const TYPES = [
@@ -58,6 +59,7 @@ export default function CartPage() {
     }, [filtered]);
 
     return (
+        <>
         <section>
             <Navbar/>
             <div className="min-h-screen w-full max-w-7xl mx-auto px-6 py-8">
@@ -148,5 +150,7 @@ export default function CartPage() {
                 </div>
             </div>
         </section>
+        <Footer />
+        </>
     );
 }

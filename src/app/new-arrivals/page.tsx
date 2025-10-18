@@ -1,8 +1,10 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function NewArrivalsPage() {
 
     return (
+        <>
         <main className="min-h-screen w-full bg-gray-50">
             <Navbar/>
             <div className="max-w-7xl mx-auto py-8">
@@ -63,5 +65,7 @@ export default function NewArrivalsPage() {
                 </div>
             </div>
         </main>
+        <Footer />
+        </>
     );
 }

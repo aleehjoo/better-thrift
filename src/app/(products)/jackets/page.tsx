@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
 import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
 import SectionHeader from "@/components/SectionHeader";
+import Footer from "@/components/Footer";
 
 export default function JacketsPage() {
     const FILTERS = [
@@ -59,6 +60,7 @@ export default function JacketsPage() {
     const sorted = useMemo(() => sortProducts(filtered, sort), [filtered, sort]);
 
     return (
+        <>
         <section className="w-full">
             <Navbar />
             <div className="max-w-7xl mx-auto px-6 py-16">
@@ -109,5 +111,7 @@ export default function JacketsPage() {
                 </div>
             </div>
         </section>
+        <Footer />
+        </>
     )
 }
