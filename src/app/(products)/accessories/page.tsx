@@ -104,6 +104,10 @@ export default function AccessoriesPage() {
                             </div>
                         </div>
 
+                        <div className="md:hidden mb-4 flex items-center justify-end">
+                            <SortDropdown value={sort} onChange={setSort} />
+                        </div>
+
                         <ProductGrid products={sorted} />
                     </main>
                 </div>
