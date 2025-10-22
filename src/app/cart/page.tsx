@@ -4,6 +4,7 @@ import React, { useMemo, useState } from 'react';
 import CartItem from "@/components/CartItem";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FilterPanel from "@/components/FilterPanel";
 
 export default function CartPage() {
     const TYPES = [
@@ -67,31 +68,13 @@ export default function CartPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     <aside className="lg:col-span-1">
-                        <div className="rounded-xl border border-foreground/15 bg-background p-5">
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-lg font-semibold">Filters</h2>
-                                <button onClick={clearFilters} className="text-xs text-foreground/60 hover:text-foreground/90">Clear</button>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div>
-                                    <h3 className="text-sm font-medium text-foreground/80 mb-2">Type</h3>
-                                    <div className="space-y-2">
-                                        {TYPES.map(type => (
-                                            <label key={type} className="flex items-center gap-3 text-sm cursor-pointer select-none">
-                                                <input
-                                                    type="checkbox"
-                                                    className="accent-foreground/70"
-                                                    checked={selectedTypes.has(type)}
-                                                    onChange={() => toggleType(type)}
-                                                />
-                                                {type}
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <FilterPanel
+                            sectionLabel="Type"
+                            options={[...TYPES]}
+                            selected={selectedTypes}
+                            onToggle={toggleType}
+                            onClear={clearFilters}
+                        />
                     </aside>
 
                     <div className="lg:col-span-3">

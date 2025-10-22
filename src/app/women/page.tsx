@@ -6,6 +6,7 @@ import ProductGrid from "@/components/ProductGrid";
 import SortDropdown, { SortOption, sortProducts } from "@/components/SortDropdown";
 import SectionHeader from "@/components/SectionHeader";
 import Footer from "@/components/Footer";
+import FilterPanel from "@/components/FilterPanel";
 
 export default function WomensPage () {
     const PRODUCTS = [
@@ -22,6 +23,30 @@ export default function WomensPage () {
         { id: 11, name: "Pleated Skirt", price: "$42.00", type: "Skirts", tags: ["pleated", "flowy"], description: "Flowy pleated skirt" },
         { id: 12, name: "Ankle Boots", price: "$68.00", type: "Shoes", tags: ["ankle", "leather"], description: "Versatile ankle boots" },
     ];
+    const FILTERS = [
+        "Shirts",
+        "Jackets",
+        "Pants",
+        "Accessories",
+        "Shoes",
+        "Hoodie",
+        "Sweaters",
+        "Suits & Blazers",
+        "Shorts",
+    ] as const;
+
+    const [selectedFilters, setSelectedFilters] = useState<Set<string>>(new Set());
+
+    const toggleFilter = (filter: string) => {
+        setSelectedFilters(prev => {
+            const next = new Set(prev);
+            if (next.has(filter)) next.delete(filter); else next.add(filter);
+            return next;
+        });
+    };
+
+    const clearFilters = () => setSelectedFilters(new Set());
+
     const [sort, setSort] = useState<SortOption>("featured");
     const sorted = useMemo(() => sortProducts(PRODUCTS, sort), [sort]);
 
@@ -33,54 +58,13 @@ export default function WomensPage () {
                 <SectionHeader title="Women" subtitle="Discover new arrivals and timeless styles for her" />
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <aside className="md:col-span-1">
-                        <div className="rounded-xl border border-foreground/15 bg-background p-5">
-                            <h2 className="text-lg font-semibold mb-4">Filters</h2>
-
-                            <div className="space-y-4">
-                                <div>
-                                    <h3 className="text-sm font-medium text-foreground/80 mb-2">Type</h3>
-                                    <div className="space-y-2">
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Shirts
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Jackets
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Pants
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Accessories
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Shoes
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Hoodie
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Sweaters
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Suits & Blazers
-                                        </label>
-                                        <label className="flex items-center gap-3 text-sm">
-                                            <input type="checkbox" className="accent-foreground/70" />
-                                            Shorts
-                                        </label>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <FilterPanel
+                            sectionLabel="Type"
+                            options={[...FILTERS]}
+                            selected={selectedFilters}
+                            onToggle={toggleFilter}
+                            onClear={clearFilters}
+                        />
                     </aside>
 
                     <main className="md:col-span-3">
