@@ -38,6 +38,7 @@ export default function CartPage() {
         { id: 6, name: "Chino Shorts", price: 500, quantity: 2, image: "/placeholder.png", type: "Shorts", tags: ["chino", "summer", "casual"] },
     ];
 
+    const [items, setItems] = useState(CART_ITEMS);
     const [selectedTypes, setSelectedTypes] = useState<Set<string>>(new Set());
 
     const toggleType = (type: string) => {
@@ -50,10 +51,23 @@ export default function CartPage() {
 
     const clearFilters = () => setSelectedTypes(new Set());
 
+    // Cart item handlers
+    const increment = (id: number) => {
+        setItems(prev => prev.map(i => i.id === id ? { ...i, quantity: i.quantity + 1 } : i));
+    };
+
+    const decrement = (id: number) => {
+        setItems(prev => prev.map(i => i.id === id && i.quantity > 1 ? { ...i, quantity: i.quantity - 1 } : i));
+    };
+
+    const remove = (id: number) => {
+        setItems(prev => prev.filter(i => i.id !== id));
+    };
+
     const filtered = useMemo(() => {
-        if (selectedTypes.size === 0) return CART_ITEMS;
-        return CART_ITEMS.filter(item => selectedTypes.has(item.type));
-    }, [selectedTypes]);
+        if (selectedTypes.size === 0) return items;
+        return items.filter(item => selectedTypes.has(item.type));
+    }, [items, selectedTypes]);
 
     const total = useMemo(() => {
         return filtered.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -109,13 +123,23 @@ export default function CartPage() {
                                     </div>
 
                                     <div className="flex flex-col gap-2">
-                                        <button className="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200">
+                                        <button 
+                                            onClick={() => increment(item.id)}
+                                            className="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors"
+                                        >
                                             +
                                         </button>
-                                        <button className="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200">
+                                        <button 
+                                            onClick={() => decrement(item.id)}
+                                            disabled={item.quantity <= 1}
+                                            className="px-3 py-1 text-sm bg-gray-100 rounded hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
                                             –
                                         </button>
-                                        <button className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600">
+                                        <button 
+                                            onClick={() => remove(item.id)}
+                                            className="px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                                        >
                                             Remove
                                         </button>
                                     </div>
